@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Custom classes for the 3D double-sided flippable Flashcard system */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Slow spin rotation animation for the cute timer and sparkles logos */
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+/* Base custom font configurations */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;750&display=swap');
+
+@theme {
+  --font-sans: "Quicksand", "Fredoka", ui-sans-serif, system-ui;
+  --font-display: "Fredoka", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #FFFDF0;
+  color: #6D6875;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: #6D6875;
+}

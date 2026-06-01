@@ -1,0 +1,6 @@
+{
+  "name": "Botak Hitam Imut",
+  "description": "Aplikasi belajar interaktif super gemas bersama asisten belajar Botak Hitam Imut!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
