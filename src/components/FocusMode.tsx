@@ -7,6 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Mascot from './Mascot';
 import { Play, Pause, RotateCcw, Volume2, Timer, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import ReactPlayer from 'react-player';
 
 interface FocusModeProps {
   onFocusComplete: (minutes: number) => void;
@@ -350,20 +351,23 @@ export default function FocusMode({ onFocusComplete, addXp }: FocusModeProps) {
         Belajar intensif selama 5-25 menit yang diimbangi istirahat 5 menit terbukti mempercepat otak menyerap pelajaran baru 3x lipat dibanding belajar SKS (Sistem Kebut Semalam) menjelang UAS!
       </div>
 
-      {/* Visually Hidden YouTube Audio Player (so it doesn't get paused by the browser) */}
-      {isActive && !isMuted && (
-        <div className="fixed -top-full -left-full w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/DWUFRDHTDuk?autoplay=1&loop=1&playlist=DWUFRDHTDuk"
-            title="Focus Mode BGM"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-      )}
+      {/* Visually Hidden YouTube Audio Player via ReactPlayer (Reliable Autoplay & Mute) */}
+      <div className="fixed -top-full -left-full w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=DWUFRDHTDuk"
+          playing={isActive}
+          loop={true}
+          muted={isMuted}
+          volume={0.6}
+          width="10px"
+          height="10px"
+          config={{
+            youtube: {
+              playerVars: { showinfo: 0, controls: 0, autoplay: 1 }
+            }
+          }}
+        />
+      </div>
     </div>
   );
 }
