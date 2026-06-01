@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;750&display=swap');
 
 /* Custom classes for the 3D double-sided flippable Flashcard system */
 .perspective-1000 {
@@ -33,8 +34,6 @@
 }
 
 /* Base custom font configurations */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;750&display=swap');
-
 @theme {
   --font-sans: "Quicksand", "Fredoka", ui-sans-serif, system-ui;
   --font-display: "Fredoka", sans-serif;

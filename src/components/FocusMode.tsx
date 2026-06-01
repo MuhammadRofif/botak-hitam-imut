@@ -349,6 +349,21 @@ export default function FocusMode({ onFocusComplete, addXp }: FocusModeProps) {
         </p>
         Belajar intensif selama 5-25 menit yang diimbangi istirahat 5 menit terbukti mempercepat otak menyerap pelajaran baru 3x lipat dibanding belajar SKS (Sistem Kebut Semalam) menjelang UAS!
       </div>
+
+      {/* Visually Hidden YouTube Audio Player (so it doesn't get paused by the browser) */}
+      {isActive && !isMuted && (
+        <div className="fixed -top-full -left-full w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/DWUFRDHTDuk?autoplay=1&loop=1&playlist=DWUFRDHTDuk"
+            title="Focus Mode BGM"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 }
