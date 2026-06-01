@@ -7,7 +7,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import Mascot from './Mascot';
 import { Play, Pause, RotateCcw, Volume2, Timer, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import ReactPlayer from 'react-player';
 
 interface FocusModeProps {
   onFocusComplete: (minutes: number) => void;
@@ -30,6 +29,18 @@ export default function FocusMode({ onFocusComplete, addXp }: FocusModeProps) {
   const [focusQuote, setFocusQuote] = useState('Mari matikan semua notifikasi HP dan mulailah belajar tenang bersama Bubu!');
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Play/Pause Background Music natively
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isActive && !isMuted) {
+        audioRef.current.play().catch(e => console.warn('Audio di-pause oleh browser', e));
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isActive, isMuted]);
 
   // Cute quotes list
   const QUOTES = [
@@ -351,20 +362,12 @@ export default function FocusMode({ onFocusComplete, addXp }: FocusModeProps) {
         Belajar intensif selama 5-25 menit yang diimbangi istirahat 5 menit terbukti mempercepat otak menyerap pelajaran baru 3x lipat dibanding belajar SKS (Sistem Kebut Semalam) menjelang UAS!
       </div>
 
-      {/* Visually Hidden YouTube Audio Player via ReactPlayer */}
-      {/* Selalu di-render (tidak di dalam if isActive) agar iframe sudah siap sebelum tombol play ditekan. 
-          Ini wajib dilakukan untuk mengatasi pemblokiran autoplay di Vercel/Production. */}
-      <div className="fixed -top-full -left-full w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
-        {React.createElement(ReactPlayer as any, {
-          url: "https://www.youtube.com/watch?v=DWUFRDHTDuk",
-          playing: isActive,
-          loop: true,
-          muted: isMuted,
-          volume: 0.6,
-          width: "10px",
-          height: "10px"
-        })}
-      </div>
+      {/* Native MP3 Audio Player (Local File) */}
+      <audio
+        ref={audioRef}
+        src="/musik.mp3"
+        loop
+      />
     </div>
   );
 }
