@@ -363,7 +363,7 @@ export default function FocusMode({ onFocusComplete, addXp }: FocusModeProps) {
           height="10px"
           config={{
             youtube: {
-              playerVars: { showinfo: 0, controls: 0, autoplay: 1 }
+              playerVars: { controls: 0 }
             }
           }}
         />
