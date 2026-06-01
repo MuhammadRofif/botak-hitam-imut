@@ -351,22 +351,19 @@ export default function FocusMode({ onFocusComplete, addXp }: FocusModeProps) {
         Belajar intensif selama 5-25 menit yang diimbangi istirahat 5 menit terbukti mempercepat otak menyerap pelajaran baru 3x lipat dibanding belajar SKS (Sistem Kebut Semalam) menjelang UAS!
       </div>
 
-      {/* Visually Hidden YouTube Audio Player via ReactPlayer (Reliable Autoplay & Mute) */}
+      {/* Visually Hidden YouTube Audio Player via ReactPlayer */}
+      {/* Selalu di-render (tidak di dalam if isActive) agar iframe sudah siap sebelum tombol play ditekan. 
+          Ini wajib dilakukan untuk mengatasi pemblokiran autoplay di Vercel/Production. */}
       <div className="fixed -top-full -left-full w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
-        <ReactPlayer
-          url="https://www.youtube.com/watch?v=DWUFRDHTDuk"
-          playing={isActive}
-          loop={true}
-          muted={isMuted}
-          volume={0.6}
-          width="10px"
-          height="10px"
-          config={{
-            youtube: {
-              playerVars: { controls: 0 }
-            }
-          }}
-        />
+        {React.createElement(ReactPlayer as any, {
+          url: "https://www.youtube.com/watch?v=DWUFRDHTDuk",
+          playing: isActive,
+          loop: true,
+          muted: isMuted,
+          volume: 0.6,
+          width: "10px",
+          height: "10px"
+        })}
       </div>
     </div>
   );
