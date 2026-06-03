@@ -29,6 +29,7 @@ import {
   Flame
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import MarkdownRenderer from './MarkdownRenderer';
 
 interface MateriDashboardProps {
   subjects: Subject[];
@@ -429,9 +430,9 @@ export default function MateriDashboard({
                       </div>
 
                       {/* Content text */}
-                      <p className="text-xs text-slate-600 leading-relaxed bg-slate-50/50 p-3 rounded-2xl border-1.5 border-slate-150 mb-3.5">
-                        {mat.content}
-                      </p>
+                      <div className="bg-slate-50/50 p-3.5 rounded-2xl border-1.5 border-slate-150 mb-3.5">
+                        <MarkdownRenderer content={mat.content} />
+                      </div>
 
                       {/* Bullet point lists if available */}
                       {mat.points.length > 0 && (

@@ -22,8 +22,25 @@ import {
   saveSupabaseSubject,
   saveSupabaseMaterial,
   saveSupabaseUserStats,
-  seedLocalStorageToSupabase
+  seedLocalStorageToSupabase,
+  deleteSupabaseSubject,
+  deleteSupabaseMaterial
 } from './lib/supabase';
+
+// Helper to sort materials: default materials in order (m1 to m18), then custom materials
+const sortMaterials = (mats: Material[]): Material[] => {
+  return [...mats].sort((a, b) => {
+    const aMatch = a.id.match(/^m(\d+)$/);
+    const bMatch = b.id.match(/^m(\d+)$/);
+    
+    if (aMatch && bMatch) {
+      return parseInt(aMatch[1], 10) - parseInt(bMatch[1], 10);
+    }
+    if (aMatch) return -1;
+    if (bMatch) return 1;
+    return a.id.localeCompare(b.id);
+  });
+};
 
 export default function App() {
   // --- CORE STATE ---
@@ -55,13 +72,27 @@ export default function App() {
   useEffect(() => {
     const initializeDatabase = async () => {
       try {
+        const updatedTitlesMap: Record<string, string> = {
+          m8: 'Bu Arlina - Kelompok 1 - Filariasis',
+          m9: 'Bu Arlina - Kelompok 2 - Chikungunya',
+          m10: 'Bu Arlina - Kelompok 3 - Kusta',
+          m11: 'Bu Arlina - Kelompok 4 - Frambusia',
+          m12: 'Bu Arlina - Kelompok 5 - Scabies',
+          m13: 'Pak Amri - Kelompok 1 - Campak',
+          m14: 'Pak Amri - Kelompok 2 - Polio',
+          m15: 'Pak Amri - Kelompok 3 - Gondongan',
+          m16: 'Pak Amri - Kelompok 4 - Meningitis',
+          m17: 'Pak Amri - Kelompok 5 - TBC',
+          m18: 'Pak Amri - Kelompok 6 - Hepatitis'
+        };
+
         // 1. Instantly parse from LocalStorage to achieve zero-layout-shift preview
         const storedSubjects = localStorage.getItem('uas_subjects');
         const storedMaterials = localStorage.getItem('uas_materials');
         const storedStats = localStorage.getItem('uas_user_stats');
 
         let initialSubjects = DEFAULT_SUBJECTS;
-        let initialMaterials = DEFAULT_MATERIALS;
+        let initialMaterials = sortMaterials(DEFAULT_MATERIALS);
         let initialStats: UserStats = {
           xp: 0,
           level: 1,
@@ -74,8 +105,49 @@ export default function App() {
           pomodoroStudyMinutes: 0
         };
 
-        if (storedSubjects) initialSubjects = JSON.parse(storedSubjects);
-        if (storedMaterials) initialMaterials = JSON.parse(storedMaterials);
+        if (storedSubjects) {
+          let parsed = JSON.parse(storedSubjects) as Subject[];
+          parsed = parsed.filter(s => s.id !== 'epi-penyakit-menular');
+          
+          const merged = [...parsed];
+          DEFAULT_SUBJECTS.forEach(defSub => {
+            if (!merged.some(s => s.id === defSub.id)) {
+              merged.push(defSub);
+            }
+          });
+          initialSubjects = merged;
+          localStorage.setItem('uas_subjects', JSON.stringify(merged));
+        }
+        
+        if (storedMaterials) {
+          let parsed = JSON.parse(storedMaterials) as Material[];
+          parsed = parsed.filter(m => m.id !== 'm6');
+          parsed = parsed.map(m => {
+            if (m.subjectId === 'epi-penyakit-menular') {
+              m.subjectId = 'epi-penyakit-tropis';
+            }
+            if (updatedTitlesMap[m.id]) {
+              m.title = updatedTitlesMap[m.id];
+            }
+            return m;
+          });
+
+          const merged = [...parsed];
+          DEFAULT_MATERIALS.forEach(defMat => {
+            const idx = merged.findIndex(m => m.id === defMat.id);
+            if (idx === -1) {
+              merged.push(defMat);
+            } else {
+              if (updatedTitlesMap[defMat.id]) {
+                merged[idx].title = defMat.title;
+              }
+            }
+          });
+          const sortedMerged = sortMaterials(merged);
+          initialMaterials = sortedMerged;
+          localStorage.setItem('uas_materials', JSON.stringify(sortedMerged));
+        }
+
         if (storedStats) initialStats = JSON.parse(storedStats);
 
         // Pre-fill immediately
@@ -102,11 +174,49 @@ export default function App() {
                 setDbStatus('error');
               }
             } else {
-              // Remote tables have existing values; load them and refresh local caches
-              setSubjects(sbSubjects);
-              setMaterials(sbMaterials);
-              localStorage.setItem('uas_subjects', JSON.stringify(sbSubjects));
-              localStorage.setItem('uas_materials', JSON.stringify(sbMaterials));
+              // Remote tables have existing values; load them, but also ensure missing default subjects/materials are synced
+              if (sbSubjects.some(s => s.id === 'epi-penyakit-menular')) {
+                await deleteSupabaseSubject('epi-penyakit-menular');
+              }
+
+              let mergedSubjects = sbSubjects.filter(s => s.id !== 'epi-penyakit-menular');
+              for (const defSub of DEFAULT_SUBJECTS) {
+                if (!mergedSubjects.some(s => s.id === defSub.id)) {
+                  await saveSupabaseSubject(defSub);
+                  mergedSubjects.push(defSub);
+                }
+              }
+
+              if (sbMaterials.some(m => m.id === 'm6')) {
+                await deleteSupabaseMaterial('m6');
+              }
+
+              let mergedMaterials = sbMaterials.filter(m => m.id !== 'm6').map(m => {
+                if (m.subjectId === 'epi-penyakit-menular') {
+                  m.subjectId = 'epi-penyakit-tropis';
+                }
+                if (updatedTitlesMap[m.id]) {
+                  m.title = updatedTitlesMap[m.id];
+                }
+                return m;
+              });
+
+              for (const defMat of DEFAULT_MATERIALS) {
+                const existing = mergedMaterials.find(m => m.id === defMat.id);
+                if (!existing) {
+                  await saveSupabaseMaterial(defMat);
+                  mergedMaterials.push(defMat);
+                } else if (existing.title !== defMat.title) {
+                  existing.title = defMat.title;
+                  await saveSupabaseMaterial(existing);
+                }
+              }
+
+              const sortedMergedMaterials = sortMaterials(mergedMaterials);
+              setSubjects(mergedSubjects);
+              setMaterials(sortedMergedMaterials);
+              localStorage.setItem('uas_subjects', JSON.stringify(mergedSubjects));
+              localStorage.setItem('uas_materials', JSON.stringify(sortedMergedMaterials));
 
               if (sbStats) {
                 setStats(sbStats);
@@ -122,7 +232,7 @@ export default function App() {
           // If local storage didn't exist, set initial default values
           if (!storedSubjects || !storedMaterials) {
             localStorage.setItem('uas_subjects', JSON.stringify(DEFAULT_SUBJECTS));
-            localStorage.setItem('uas_materials', JSON.stringify(DEFAULT_MATERIALS));
+            localStorage.setItem('uas_materials', JSON.stringify(sortMaterials(DEFAULT_MATERIALS)));
           }
           if (!storedStats) {
             localStorage.setItem('uas_user_stats', JSON.stringify(initialStats));
@@ -182,9 +292,9 @@ export default function App() {
 
   // Add Material
   const handleAddMaterial = async (newMaterial: Material) => {
-    const updated = [newMaterial, ...materials];
-    setMaterials(updated);
-    localStorage.setItem('uas_materials', JSON.stringify(updated));
+    const sortedUpdated = sortMaterials([newMaterial, ...materials]);
+    setMaterials(sortedUpdated);
+    localStorage.setItem('uas_materials', JSON.stringify(sortedUpdated));
 
     if (isSupabaseConfigured) {
       await saveSupabaseMaterial(newMaterial);
@@ -391,7 +501,7 @@ export default function App() {
     
     // Reload state
     setSubjects(DEFAULT_SUBJECTS);
-    setMaterials(DEFAULT_MATERIALS);
+    setMaterials(sortMaterials(DEFAULT_MATERIALS));
     setSelectedSubjectId('aplikasi-skrining');
     
     const initialStats: UserStats = {

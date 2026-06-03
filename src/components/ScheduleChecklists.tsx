@@ -117,6 +117,20 @@ export default function ScheduleChecklists({ subjects, onSelectSubject, onGoToMa
     } catch (e) {}
   }, []);
 
+  const isPastDate = (dateStr: string) => {
+    const match = dateStr.match(/^(\d+)\s+Juni\s+(\d+)$/);
+    if (!match) return false;
+    
+    const day = parseInt(match[1], 10);
+    const year = parseInt(match[2], 10);
+    
+    // Create Date object representing end of the exam day (11:59:59 PM)
+    const examDate = new Date(year, 5, day, 23, 59, 59);
+    
+    const today = new Date();
+    return examDate < today;
+  };
+
   const toggleUasItem = (id: string) => {
     const updated = uasChecked.includes(id)
       ? uasChecked.filter((item) => item !== id)
@@ -290,19 +304,31 @@ export default function ScheduleChecklists({ subjects, onSelectSubject, onGoToMa
         {/* Timetable Grid cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredExams.map((exam, i) => {
+            const isPast = isPastDate(exam.date);
             return (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.05 }}
-                className="group relative bg-[#FFFDF0] border-3 border-[#6D6875] rounded-2xl p-5 hover:scale-[1.01] transition-transform duration-200 flex flex-col justify-between shadow-[4px_4px_0px_#6D6875] overflow-hidden"
+                className={`group relative border-3 rounded-2xl p-5 hover:scale-[1.01] transition-transform duration-200 flex flex-col justify-between shadow-[4px_4px_0px_#6D6875] overflow-hidden ${
+                  isPast
+                    ? 'bg-slate-900/10 border-slate-500 text-slate-400 opacity-60 filter grayscale'
+                    : 'bg-[#FFFDF0] border-[#6D6875] text-[#6D6875]'
+                }`}
               >
                 {/* Visual marker ribbon */}
-                <div className="absolute top-0 right-0 py-1 px-3 text-[10px] font-black border-l-2 border-b-2 border-[#6D6875] bg-[#E2F0CB] text-[#6D6875] rounded-bl-xl uppercase tracking-wider flex items-center gap-1">
-                  <span>📍</span>
-                  {exam.room}
-                </div>
+                {isPast ? (
+                  <div className="absolute top-0 right-0 py-1 px-3 text-[10px] font-black border-l-2 border-b-2 border-slate-700 bg-slate-800 text-slate-300 rounded-bl-xl uppercase tracking-wider flex items-center gap-1">
+                    <span>✓</span>
+                    SELESAI ({exam.room})
+                  </div>
+                ) : (
+                  <div className="absolute top-0 right-0 py-1 px-3 text-[10px] font-black border-l-2 border-b-2 border-[#6D6875] bg-[#E2F0CB] text-[#6D6875] rounded-bl-xl uppercase tracking-wider flex items-center gap-1">
+                    <span>📍</span>
+                    {exam.room}
+                  </div>
+                )}
 
                 <div className="space-y-3">
                   <div className="space-y-1">
@@ -313,12 +339,15 @@ export default function ScheduleChecklists({ subjects, onSelectSubject, onGoToMa
                       <Timer size={12} />
                       {exam.time}
                     </div>
-                    <h4 className="font-sans font-black text-[#6D6875] text-sm pr-16 group-hover:text-amber-700 transition-colors">
+                    <h4 className={`font-sans font-black text-sm pr-16 transition-colors ${
+                      isPast ? 'text-slate-400' : 'text-[#6D6875] group-hover:text-amber-700'
+                    }`}>
+                      {isPast && <span className="text-emerald-500 mr-1 font-extrabold">✓</span>}
                       {exam.subjectName}
                     </h4>
                   </div>
                   
-                  <p className="text-[11px] text-slate-500 leading-normal">
+                  <p className="text-[11px] text-slate-550 leading-normal">
                     {subjects.find((s) => s.id === exam.subjectId)?.description ||
                       'Mata kuliah epidemiologi terapan yang wajib dikuasai dengan tuntas.'}
                   </p>
@@ -330,7 +359,11 @@ export default function ScheduleChecklists({ subjects, onSelectSubject, onGoToMa
                       onSelectSubject(exam.subjectId);
                       onGoToMateri();
                     }}
-                    className="flex-1 bg-[#FFDAC1] hover:bg-[#FFC6A5] border-2 border-[#6D6875] text-[#6D6875] text-center font-black text-[10px] py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#6D6875] cursor-pointer transition-all active:translate-y-0.5 active:shadow-[1px_1px_0px_#6D6875]"
+                    className={`flex-1 text-center font-black text-[10px] py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#6D6875] cursor-pointer transition-all active:translate-y-0.5 active:shadow-[1px_1px_0px_#6D6875] ${
+                      isPast
+                        ? 'bg-slate-200 hover:bg-slate-300 border-2 border-slate-700 text-slate-600'
+                        : 'bg-[#FFDAC1] hover:bg-[#FFC6A5] border-2 border-[#6D6875] text-[#6D6875]'
+                    }`}
                   >
                     <span>📓</span>
                     Buka Rangkuman
@@ -343,7 +376,11 @@ export default function ScheduleChecklists({ subjects, onSelectSubject, onGoToMa
                       // Custom event trigger to navigate to play game
                       window.dispatchEvent(new CustomEvent('change_nav_tab', { detail: 'games' }));
                     }}
-                    className="flex-1 bg-[#C7CEEA] hover:bg-[#B1BADF] border-2 border-[#6D6875] text-[#6D6875] text-center font-black text-[10px] py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#6D6875] cursor-pointer transition-all active:translate-y-0.5 active:shadow-[1px_1px_0px_#6D6875]"
+                    className={`flex-1 text-center font-black text-[10px] py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#6D6875] cursor-pointer transition-all active:translate-y-0.5 active:shadow-[1px_1px_0px_#6D6875] ${
+                      isPast
+                        ? 'bg-slate-300 hover:bg-slate-400 border-2 border-slate-700 text-slate-700'
+                        : 'bg-[#C7CEEA] hover:bg-[#B1BADF] border-2 border-[#6D6875] text-[#6D6875]'
+                    }`}
                   >
                     <span>🎮</span>
                     Main Kuis Game
