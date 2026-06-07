@@ -550,14 +550,14 @@ export default function App() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Glowing mascot logo & app name */}
           <div className="flex items-center gap-3">
-            <div className="relative h-12 w-12 rounded-2xl bg-[#FFB7B2] border-2 border-[#6D6875] flex items-center justify-center shadow-[3px_3px_0px_#6D6875]">
-              <span className="text-2xl animate-bounce">🧑‍🦲</span>
+            <div className="relative h-12 w-12 rounded-2xl bg-[#B5EAD7] border-2 border-[#6D6875] overflow-hidden flex items-center justify-center shadow-[3px_3px_0px_#6D6875]">
+              <img src="/green-mascot.png" alt="Logo" className="h-full w-full object-cover scale-110" />
               <div className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-[#FF9AA2] border-2 border-white animate-pulse"></div>
             </div>
             
             <div>
               <h1 className="text-xl font-sans font-black text-[#FF9AA2] tracking-tight flex items-center gap-2">
-                Botak Hitam Imut <span className="text-xs bg-[#B5EAD7] text-[#6D6875] px-2 py-0.5 rounded-full font-bold">Ver. Gembira</span>
+                Botak Hijau Imut <span className="text-xs bg-[#B5EAD7] text-[#6D6875] px-2 py-0.5 rounded-full font-bold">Ver. Gembira</span>
               </h1>
               <p className="text-[10px] text-slate-500 font-sans leading-tight">
                 Menyulap rintangan UAS menjadi Arena Bermain yang Mengasyikkan!
