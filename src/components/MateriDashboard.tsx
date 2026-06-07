@@ -26,7 +26,8 @@ import {
   Activity,
   Database,
   Shield,
-  Flame
+  Flame,
+  Volume2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import MarkdownRenderer from './MarkdownRenderer';
@@ -117,6 +118,8 @@ export default function MateriDashboard({
         return <Shield size={size} />;
       case 'Flame':
         return <Flame size={size} />;
+      case 'Volume2':
+        return <Volume2 size={size} />;
       case 'BookOpen':
       default:
         return <BookOpen size={size} />;
@@ -696,7 +699,8 @@ export default function MateriDashboard({
                   { name: 'Database', icon: <Database size={16} /> },
                   { name: 'Shield', icon: <Shield size={16} /> },
                   { name: 'Flame', icon: <Flame size={16} /> },
-                  { name: 'Brain', icon: <Brain size={16} /> }
+                  { name: 'Brain', icon: <Brain size={16} /> },
+                  { name: 'Volume2', icon: <Volume2 size={16} /> }
                 ].map((item) => (
                   <button
                     key={item.name}

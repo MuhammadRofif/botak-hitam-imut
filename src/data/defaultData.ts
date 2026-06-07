@@ -61,6 +61,14 @@ export const DEFAULT_SUBJECTS: Subject[] = [
     color: 'rose',
     description: 'Langkah taktis penyelidikan kejadian luar biasa (KLB), melacak kurva epidemi, dan klasterisasi kasus.',
     createdAt: '2026-06-01T00:00:00Z',
+  },
+  {
+    id: 'advokes',
+    name: 'Advokes',
+    icon: 'Volume2',
+    color: 'sky',
+    description: 'Metode komunikasi publik, lobi kebijakan, kampanye kesehatan, dan mobilisasi sosial untuk perubahan kebijakan kesehatan.',
+    createdAt: '2026-06-01T00:00:00Z',
   }
 ];
 
@@ -1918,6 +1926,252 @@ export const DEFAULT_MATERIALS: Material[] = [
         answer: 'Menjaga sanitasi, air bersih, dan kebersihan makanan.',
         level: 0
       }
+    ],
+    createdAt: '2026-06-03T00:00:00Z'
+  },
+  {
+    id: 'm19',
+    subjectId: 'advokes',
+    title: 'PTM 1: Konsep Advokasi dalam Kesehatan',
+    content: 'Advokasi kesehatan merupakan upaya persuasif untuk memperoleh komitmen, dukungan, dan kebijakan yang mendukung program kesehatan masyarakat. Advokasi dilakukan melalui komunikasi, penyadaran, argumentasi, dan rekomendasi kepada pembuat kebijakan serta pihak terkait. Materi ini membahas konsep dasar advokasi, tujuan, strategi, prinsip, komponen, sasaran, serta penerapan advokasi dalam bidang kesehatan masyarakat.',
+    points: [
+      'Advokasi kesehatan', 'Komitmen kebijakan', 'Persuasi', 'Lobbying', 'Dukungan sosial', 'Pemberdayaan',
+      'Pembuat kebijakan', 'Strategi advokasi', 'Koalisi', 'Networking', 'Monitoring evaluasi', 'Komunikasi efektif',
+      'Kebijakan kesehatan', 'Pengambilan keputusan', 'Promosi kesehatan', 'Komitmen politik', 'Software kebijakan', 'Hardware kesehatan'
+    ],
+    formulas: [
+      'WHO 1984 = Advokasi + Dukungan sosial + Pemberdayaan',
+      'Tujuan advokasi = Komitmen + Dukungan + Tindak lanjut',
+      'Komponen advokasi = Data + Audiens + Pesan + Evaluasi',
+      'Prinsip = Realistis + Sistematis + Strategis + Non kekerasan',
+      'Sasaran = Pembuat kebijakan + Stakeholder'
+    ],
+    flashcards: [
+      { id: 'fc-m19-1', question: 'Apa itu advokasi kesehatan?', answer: 'Upaya persuasif untuk memperoleh dukungan dan komitmen terhadap program kesehatan.', level: 0 },
+      { id: 'fc-m19-2', question: 'Mengapa advokasi penting dalam program kesehatan?', answer: 'Karena program kesehatan sering gagal tanpa dukungan pembuat kebijakan.', level: 0 },
+      { id: 'fc-m19-3', question: 'Apa definisi advokasi menurut John Hopkins (1990)?', answer: 'Upaya memengaruhi kebijakan publik melalui komunikasi persuasif.', level: 0 },
+      { id: 'fc-m19-4', question: 'Apa tujuan utama advokasi kesehatan?', answer: 'Mendapatkan komitmen dan dukungan kebijakan.', level: 0 },
+      { id: 'fc-m19-5', question: 'Apa tiga strategi promosi kesehatan menurut WHO 1984?', answer: 'Advokasi, dukungan sosial, dan pemberdayaan.', level: 0 },
+      { id: 'fc-m19-6', question: 'Apa sasaran advokasi pada strategi global promosi kesehatan?', answer: 'Pembuat kebijakan dan pengambil keputusan.', level: 0 },
+      { id: 'fc-m19-7', question: 'Apa yang dimaksud dukungan sosial dalam promosi kesehatan?', answer: 'Membentuk dukungan masyarakat melalui tokoh dan jaringan sosial.', level: 0 },
+      { id: 'fc-m19-8', question: 'Apa yang dimaksud pemberdayaan dalam promosi kesehatan?', answer: 'Meningkatkan kemampuan masyarakat melalui pendidikan dan penyuluhan.', level: 0 },
+      { id: 'fc-m19-9', question: 'Apa bentuk advokasi yang berupa komunikasi langsung?', answer: 'Lobi.', level: 0 },
+      { id: 'fc-m19-10', question: 'Apa yang dimaksud kampanye dalam advokasi?', answer: 'Penyebaran isu kepada masyarakat melalui media untuk memperoleh dukungan.', level: 0 },
+      { id: 'fc-m19-11', question: 'Apa yang dimaksud komitmen politik dalam advokasi kesehatan?', answer: 'Dukungan pemerintah terhadap pembangunan kesehatan termasuk anggaran.', level: 0 },
+      { id: 'fc-m19-12', question: 'Sebutkan prinsip advokasi!', answer: 'Realistis, sistematis, taktis, strategis, berani, dan non kekerasan.', level: 0 },
+      { id: 'fc-m19-13', question: 'Mengapa advokasi harus realistis?', answer: 'Agar isu yang diperjuangkan dapat dicapai.', level: 0 },
+      { id: 'fc-m19-14', question: 'Sebutkan komponen utama advokasi!', answer: 'Tujuan, data, audiens, pesan, koalisi, presentasi, dana, dan evaluasi.', level: 0 },
+      { id: 'fc-m19-15', question: 'Siapa sasaran utama advokasi kesehatan?', answer: 'Pembuat kebijakan dan pengambil keputusan.', level: 0 },
+      { id: 'fc-m19-16', question: 'Apa yang dimaksud software dalam tujuan advokasi?', answer: 'Kebijakan seperti UU, PP, Perda, atau SK.', level: 0 },
+      { id: 'fc-m19-17', question: 'Apa yang dimaksud hardware dalam tujuan advokasi?', answer: 'Dukungan sarana, prasarana, dan anggaran kesehatan.', level: 0 },
+      { id: 'fc-m19-18', question: 'Bagaimana karakteristik pesan advokasi yang baik?', answer: 'Jelas, benar, konkret, lengkap, dan ringkas.', level: 0 },
+      { id: 'fc-m19-19', question: 'Mengapa koalisi penting dalam advokasi?', answer: 'Untuk memperkuat dukungan dan memperluas pengaruh.', level: 0 },
+      { id: 'fc-m19-20', question: 'Apa hasil akhir yang diharapkan dari advokasi kesehatan?', answer: 'Terbentuknya kebijakan dan tindakan nyata yang mendukung kesehatan masyarakat.', level: 0 }
+    ],
+    createdAt: '2026-06-03T00:00:00Z'
+  },
+  {
+    id: 'm20',
+    subjectId: 'advokes',
+    title: 'PTM 2: Aktor dan Perannya dalam Advokasi Kesehatan',
+    content: 'Advokasi kesehatan merupakan proses yang disengaja untuk memengaruhi pengambil keputusan agar mendukung perubahan kebijakan atau program kesehatan. Dalam proses ini dibutuhkan pengetahuan, keterampilan, identifikasi aktor, serta pemahaman mengenai peran masyarakat dan stakeholder. Materi ini membahas aktor advokasi, tugas, keterampilan, sasaran, jenis advokasi, dan strategi komunikasi dalam proses advokasi kesehatan.',
+    points: [
+      'Advokasi kesehatan', 'Pengambil keputusan', 'Analisis isu', 'SMART', 'SWOT', 'Audiens advokasi',
+      'Lobby', 'Negosiasi', 'Dialog', 'Debat', 'Mobilisasi massa', 'Petisi', 'Media massa',
+      'Legislasi', 'Birokrasi', 'Sosialisasi', 'Stakeholder', 'Sasaran advokasi', 'Masyarakat', 'Evaluasi advokasi'
+    ],
+    formulas: [
+      'Kata kunci advokasi = Mempengaruhi + Proses disengaja + Pengambil keputusan',
+      'Analisis isu = SMART + SWOT',
+      'Tugas advokasi = Identifikasi + Analisis + Implementasi + Evaluasi',
+      'Teknik advokasi = Lobby + Negosiasi + Media',
+      'Sasaran = Decision maker + Stakeholder'
+    ],
+    flashcards: [
+      { id: 'fc-m20-1', question: 'Apa fokus utama advokasi kesehatan?', answer: 'Mempengaruhi pengambil keputusan untuk mendukung perubahan kesehatan.', level: 0 },
+      { id: 'fc-m20-2', question: 'Apa kata kunci utama dalam advokasi kesehatan?', answer: 'Mempengaruhi, proses disengaja, pengambil keputusan, dan dampak luas.', level: 0 },
+      { id: 'fc-m20-3', question: 'Mengapa advokasi disebut proses disengaja?', answer: 'Karena dilakukan secara terencana untuk mencapai tujuan tertentu.', level: 0 },
+      { id: 'fc-m20-4', question: 'Apa keterampilan dasar yang dibutuhkan dalam advokasi kesehatan?', answer: 'Analisis isu, komunikasi, identifikasi audiens, dan membangun kerjasama.', level: 0 },
+      { id: 'fc-m20-5', question: 'Apa fungsi analisis SMART dalam advokasi?', answer: 'Membuat tujuan yang spesifik dan terukur.', level: 0 },
+      { id: 'fc-m20-6', question: 'Apa fungsi analisis SWOT dalam advokasi?', answer: 'Menilai kekuatan, kelemahan, peluang, dan ancaman.', level: 0 },
+      { id: 'fc-m20-7', question: 'Mengapa mengemas pesan penting dalam advokasi?', answer: 'Agar pesan mudah dipahami dan mempengaruhi sasaran.', level: 0 },
+      { id: 'fc-m20-8', question: 'Sebutkan teknik advokasi yang umum digunakan!', answer: 'Lobby, negosiasi, dialog, seminar, debat, petisi, dan media massa.', level: 0 },
+      { id: 'fc-m20-9', question: 'Apa yang dimaksud lobby dalam advokasi?', answer: 'Komunikasi langsung untuk mempengaruhi pengambil keputusan.', level: 0 },
+      { id: 'fc-m20-10', question: 'Apa tugas pertama dalam proses advokasi?', answer: 'Mengidentifikasi isu.', level: 0 },
+      { id: 'fc-m20-11', question: 'Apa yang dilakukan setelah identifikasi isu?', answer: 'Analisis sasaran dan penyusunan strategi.', level: 0 },
+      { id: 'fc-m20-12', question: 'Apa dua jenis advokasi kesehatan?', answer: 'Personal advocacy dan issue based advocacy.', level: 0 },
+      { id: 'fc-m20-13', question: 'Apa yang dimaksud personal advocacy?', answer: 'Advokasi yang fokus pada masalah individu atau kasus khusus.', level: 0 },
+      { id: 'fc-m20-14', question: 'Apa yang dimaksud issue based advocacy?', answer: 'Advokasi yang fokus pada masalah kelompok atau masyarakat luas.', level: 0 },
+      { id: 'fc-m20-15', question: 'Siapa pelaku advokasi kesehatan?', answer: 'Semua pihak yang peduli termasuk pemerintah, swasta, dan tokoh masyarakat.', level: 0 },
+      { id: 'fc-m20-16', question: 'Siapa sasaran utama advokasi kesehatan?', answer: 'Pengambil keputusan dan penentu kebijakan.', level: 0 },
+      { id: 'fc-m20-17', question: 'Mengapa media menjadi sasaran advokasi?', answer: 'Karena media dapat mempengaruhi opini publik.', level: 0 },
+      { id: 'fc-m20-18', question: 'Apa peran masyarakat dalam advokasi kesehatan?', answer: 'Memberikan dukungan, partisipasi, dan mendorong perubahan sosial.', level: 0 },
+      { id: 'fc-m20-19', question: 'Apa pendekatan utama dalam komunikasi advokasi?', answer: 'Legislasi, birokrasi, sosialisasi, dan mobilisasi.', level: 0 },
+      { id: 'fc-m20-20', question: 'Mengapa evaluasi penting dalam advokasi kesehatan?', answer: 'Untuk menilai keberhasilan dan memperbaiki strategi advokasi berikutnya.', level: 0 }
+    ],
+    createdAt: '2026-06-03T00:00:00Z'
+  },
+  {
+    id: 'm21',
+    subjectId: 'advokes',
+    title: 'PTM 3: Advokasi Strategis dalam Kebijakan Kesehatan',
+    content: 'Advokasi strategis dalam kesehatan merupakan upaya sistematis untuk mempengaruhi kebijakan pro kesehatan melalui jalur formal maupun informal. Jalur formal dilakukan melalui lembaga resmi seperti DPR dan dinas pemerintah, sedangkan jalur informal memanfaatkan relasi sosial, tokoh masyarakat, dan influencer. Advokasi strategis dilakukan menggunakan berbagai metode proaktif maupun reaktif untuk mencapai perubahan kebijakan dan dukungan kesehatan masyarakat.',
+    points: [
+      'Advokasi strategis', 'Kebijakan kesehatan', 'Jalur formal', 'Jalur informal', 'DPR', 'Dinas kesehatan',
+      'Musrenbang', 'RDP', 'Influencer', 'Tokoh masyarakat', 'Media', 'Pengadilan', 'Legislasi',
+      'Lobi', 'Kampanye', 'Demonstrasi', 'Legal standing', 'Class action', 'Boikot', 'Jejaring'
+    ],
+    formulas: [
+      'Formal = DPR + Dinas + Musrenbang',
+      'Informal = Tokoh + Influencer + Relasi sosial',
+      'Proaktif = Lobby + Kampanye + Hearing',
+      'Reaktif = Demonstrasi + Gugatan + Boikot',
+      'Strategi = Media + Jejaring + Legislasi'
+    ],
+    flashcards: [
+      { id: 'fc-m21-1', question: 'Apa yang dimaksud advokasi strategis kesehatan?', answer: 'Upaya mempengaruhi kebijakan agar mendukung kesehatan masyarakat.', level: 0 },
+      { id: 'fc-m21-2', question: 'Apa tujuan utama advokasi strategis?', answer: 'Menghasilkan kebijakan yang pro kesehatan.', level: 0 },
+      { id: 'fc-m21-3', question: 'Apa perbedaan jalur formal dan informal dalam advokasi?', answer: 'Formal melalui lembaga resmi, informal melalui relasi sosial.', level: 0 },
+      { id: 'fc-m21-4', question: 'Apa contoh jalur formal advokasi kesehatan?', answer: 'DPR, dinas kesehatan, RDP, dan Musrenbang.', level: 0 },
+      { id: 'fc-m21-5', question: 'Apa contoh jalur informal advokasi kesehatan?', answer: 'Tokoh masyarakat, influencer, dan jaringan sosial.', level: 0 },
+      { id: 'fc-m21-6', question: 'Mengapa jalur informal penting dalam advokasi?', answer: 'Karena dapat mempengaruhi opini dan dukungan masyarakat.', level: 0 },
+      { id: 'fc-m21-7', question: 'Apa strategi utama dalam advokasi strategis?', answer: 'Media, pengadilan, jejaring, dan legislasi.', level: 0 },
+      { id: 'fc-m21-8', question: 'Mengapa media penting dalam advokasi kesehatan?', answer: 'Untuk meningkatkan perhatian publik terhadap isu kesehatan.', level: 0 },
+      { id: 'fc-m21-9', question: 'Apa yang dimaksud metode proaktif dalam advokasi?', answer: 'Strategi yang dilakukan sebelum konflik atau penolakan muncul.', level: 0 },
+      { id: 'fc-m21-10', question: 'Apa contoh metode proaktif?', answer: 'Lobby, dengar pendapat, dan kampanye.', level: 0 },
+      { id: 'fc-m21-11', question: 'Apa yang dimaksud lobby dalam advokasi?', answer: 'Komunikasi langsung untuk mempengaruhi pengambil keputusan.', level: 0 },
+      { id: 'fc-m21-12', question: 'Apa fungsi kegiatan dengar pendapat dalam advokasi?', answer: 'Menyampaikan aspirasi dan mendapatkan dukungan kebijakan.', level: 0 },
+      { id: 'fc-m21-13', question: 'Apa tujuan kampanye advokasi?', answer: 'Membentuk opini dan dukungan publik.', level: 0 },
+      { id: 'fc-m21-14', question: 'Apa yang dimaksud metode reaktif dalam advokasi?', answer: 'Strategi yang digunakan ketika terdapat hambatan atau konflik.', level: 0 },
+      { id: 'fc-m21-15', question: 'Sebutkan contoh metode reaktif!', answer: 'Demonstrasi, tuntutan hukum, boikot, dan revolusi.', level: 0 },
+      { id: 'fc-m21-16', question: 'Apa itu legal standing dalam advokasi?', answer: 'Hak seseorang atau kelompok untuk mengajukan gugatan hukum.', level: 0 },
+      { id: 'fc-m21-17', question: 'Apa itu class action?', answer: 'Gugatan hukum yang dilakukan oleh kelompok dengan kepentingan sama.', level: 0 },
+      { id: 'fc-m21-18', question: 'Mengapa jejaring penting dalam advokasi strategis?', answer: 'Untuk memperkuat dukungan dan memperluas pengaruh.', level: 0 },
+      { id: 'fc-m21-19', question: 'Apa tujuan menggunakan pengadilan dalam advokasi?', answer: 'Untuk memperoleh perubahan kebijakan secara hukum.', level: 0 },
+      { id: 'fc-m21-20', question: 'Apa hasil yang diharapkan dari advokasi strategis?', answer: 'Kebijakan dan tindakan nyata yang mendukung kesehatan masyarakat.', level: 0 }
+    ],
+    createdAt: '2026-06-03T00:00:00Z'
+  },
+  {
+    id: 'm22',
+    subjectId: 'advokes',
+    title: 'PTM 4: Penugasan Kelompok Strategi Advokasi Kesehatan',
+    content: 'Materi ini membahas penyusunan strategi advokasi kesehatan melalui pendekatan proaktif dan reaktif untuk menyelesaikan masalah kesehatan masyarakat. Mahasiswa diminta menyusun dokumen strategi advokasi dengan melakukan identifikasi masalah, menentukan strategi, serta melakukan pemetaan aktor formal dan informal yang terlibat dalam proses advokasi kesehatan.',
+    points: [
+      'Strategi advokasi', 'Strategi proaktif', 'Strategi reaktif', 'Lobby', 'Public hearing', 'Kampanye',
+      'Demonstrasi', 'Legal standing', 'Class action', 'Boikot', 'Revolusi', 'Pemetaan aktor',
+      'Tatanan formal', 'Tatanan informal', 'Pengambil keputusan', 'Stakeholder', 'Regulasi kesehatan', 'Tokoh masyarakat', 'Influencer', 'Dokumen advokasi'
+    ],
+    formulas: [
+      'Proaktif = Lobby + Hearing + Kampanye',
+      'Reaktif = Demonstrasi + Gugatan + Boikot',
+      'Formal = Regulasi + Pengambil keputusan',
+      'Informal = Tokoh + Influencer',
+      'Strategi advokasi = Masalah + Aktor + Tindakan'
+    ],
+    flashcards: [
+      { id: 'fc-m22-1', question: 'Apa fokus utama PTM 4 Advokasi Kesehatan?', answer: 'Penyusunan dokumen strategi advokasi kesehatan.', level: 0 },
+      { id: 'fc-m22-2', question: 'Apa tujuan penyusunan strategi advokasi kesehatan?', answer: 'Menyelesaikan masalah kesehatan melalui perubahan kebijakan dan dukungan.', level: 0 },
+      { id: 'fc-m22-3', question: 'Apa yang dimaksud strategi proaktif dalam advokasi?', answer: 'Strategi yang dilakukan sebelum muncul konflik atau hambatan.', level: 0 },
+      { id: 'fc-m22-4', question: 'Sebutkan contoh strategi proaktif!', answer: 'Lobby, public hearing, dan kampanye.', level: 0 },
+      { id: 'fc-m22-5', question: 'Apa fungsi lobby dalam advokasi kesehatan?', answer: 'Mempengaruhi pengambil keputusan secara langsung.', level: 0 },
+      { id: 'fc-m22-6', question: 'Apa itu public hearing dalam advokasi?', answer: 'Forum penyampaian aspirasi dan diskusi dengan pihak terkait.', level: 0 },
+      { id: 'fc-m22-7', question: 'Mengapa kampanye digunakan dalam advokasi?', answer: 'Untuk meningkatkan perhatian dan dukungan publik.', level: 0 },
+      { id: 'fc-m22-8', question: 'Apa yang dimaksud strategi reaktif?', answer: 'Strategi yang digunakan saat menghadapi hambatan atau konflik.', level: 0 },
+      { id: 'fc-m22-9', question: 'Sebutkan contoh strategi reaktif!', answer: 'Demonstrasi, legal standing, class action, boikot, dan revolusi.', level: 0 },
+      { id: 'fc-m22-10', question: 'Apa itu legal standing?', answer: 'Hak seseorang atau kelompok untuk mengajukan gugatan hukum.', level: 0 },
+      { id: 'fc-m22-11', question: 'Apa yang dimaksud class action?', answer: 'Gugatan hukum yang dilakukan oleh kelompok yang memiliki kepentingan sama.', level: 0 },
+      { id: 'fc-m22-12', question: 'Mengapa demonstrasi digunakan dalam advokasi?', answer: 'Untuk menunjukkan tuntutan dan memperoleh perhatian publik.', level: 0 },
+      { id: 'fc-m22-13', question: 'Apa yang dimaksud pemetaan aktor?', answer: 'Identifikasi pihak yang berpengaruh dalam proses advokasi.', level: 0 },
+      { id: 'fc-m22-14', question: 'Apa yang termasuk tatanan formal dalam advokasi?', answer: 'Pengambil keputusan resmi dan pembuat regulasi.', level: 0 },
+      { id: 'fc-m22-15', question: 'Apa yang termasuk tatanan informal dalam advokasi?', answer: 'Tokoh masyarakat dan pihak yang berpengaruh secara sosial.', level: 0 },
+      { id: 'fc-m22-16', question: 'Mengapa identifikasi aktor penting dalam advokasi?', answer: 'Agar strategi dapat diarahkan kepada pihak yang tepat.', level: 0 },
+      { id: 'fc-m22-17', question: 'Siapa yang termasuk pengambil keputusan formal?', answer: 'Pemerintah, dinas, legislatif, dan pembuat kebijakan.', level: 0 },
+      { id: 'fc-m22-18', question: 'Mengapa tokoh masyarakat penting dalam advokasi?', answer: 'Karena dapat mempengaruhi opini dan perilaku masyarakat.', level: 0 },
+      { id: 'fc-m22-19', question: 'Apa komponen utama dokumen strategi advokasi?', answer: 'Masalah kesehatan, strategi, aktor, dan tindakan.', level: 0 },
+      { id: 'fc-m22-20', question: 'Apa hasil akhir yang diharapkan dari strategi advokasi?', answer: 'Terhadinya perubahan kebijakan dan dukungan terhadap program kesehatan.', level: 0 }
+    ],
+    createdAt: '2026-06-03T00:00:00Z'
+  },
+  {
+    id: 'm23',
+    subjectId: 'advokes',
+    title: 'PTM 5: Strategi Advokasi Kesehatan',
+    content: 'Strategi advokasi kesehatan merupakan ilmu dan seni dalam menyusun proses advokasi untuk memperoleh dukungan kebijakan publik yang mendukung kesehatan masyarakat. Strategi ini melibatkan penentuan tujuan, sasaran, metode, media, serta pelaksana advokasi secara sistematis. Keberhasilan advokasi dipengaruhi oleh pemilihan strategi yang tepat, penggunaan metode yang sesuai, dan kemampuan membangun komunikasi efektif dengan pengambil keputusan.',
+    points: [
+      'Strategi advokasi', 'Advokasi kesehatan', 'Formal', 'Informal', 'SMART', 'Tim advokasi',
+      'Sasaran advokasi', 'Metode advokasi', 'Media advokasi', 'Lobby', 'Petisi', 'Debat', 'Dialog',
+      'Negosiasi', 'Pengambil keputusan', 'Media sosial', 'Kebijakan publik', 'Komunikasi kesehatan'
+    ],
+    formulas: [
+      'Strategi baik = Credible + Feasible + Relevant + Urgent + High priority',
+      'Tujuan = SMART',
+      'Formal = Seminar + Rapat + Konferensi',
+      'Informal = Arisan + Event + Reuni',
+      'Metode = Lobby + Dialog + Negosiasi + Debat'
+    ],
+    flashcards: [
+      { id: 'fc-m23-1', question: 'Apa itu strategi advokasi kesehatan?', answer: 'Ilmu dan seni menyusun proses advokasi untuk memperoleh dukungan kebijakan kesehatan.', level: 0 },
+      { id: 'fc-m23-2', question: 'Apa tujuan utama strategi advokasi kesehatan?', answer: 'Mendapatkan dukungan kebijakan publik yang berwawasan kesehatan.', level: 0 },
+      { id: 'fc-m23-3', question: 'Apa yang dimaksud tatanan formal dalam advokasi?', answer: 'Kegiatan resmi seperti rapat, seminar, dan konferensi.', level: 0 },
+      { id: 'fc-m23-4', question: 'Apa contoh tatanan informal dalam advokasi?', answer: 'Reuni, arisan, festival, dan kegiatan sosial.', level: 0 },
+      { id: 'fc-m23-5', question: 'Apa yang dimaksud Credible dalam strategi advokasi?', answer: 'Strategi harus memiliki kredibilitas dan dapat dipercaya.', level: 0 },
+      { id: 'fc-m23-6', question: 'Mengapa strategi harus feasible?', answer: 'Agar dapat dilaksanakan sesuai sumber daya yang tersedia.', level: 0 },
+      { id: 'fc-m23-7', question: 'Apa arti relevant dalam strategi advokasi?', answer: 'Strategi harus sesuai dengan masalah yang dihadapi.', level: 0 },
+      { id: 'fc-m23-8', question: 'Mengapa strategi harus urgent?', answer: 'Karena isu yang dipilih membutuhkan penanganan segera.', level: 0 },
+      { id: 'fc-m23-9', question: 'Apa yang dimaksud high priority dalam strategi advokasi?', answer: 'Isu yang dipilih memiliki tingkat kepentingan tinggi.', level: 0 },
+      { id: 'fc-m23-10', question: 'Apa tahap pertama penyusunan strategi advokasi?', answer: 'Pembentukan tim advokasi.', level: 0 },
+      { id: 'fc-m23-11', question: 'Apa yang dilakukan dalam pembentukan tim advokasi?', answer: 'Identifikasi anggota, membangun komitmen, dan organisasi tim.', level: 0 },
+      { id: 'fc-m23-12', question: 'Mengapa tujuan advokasi harus SMART?', answer: 'Agar tujuan jelas, terukur, realistis, dan memiliki batas waktu.', level: 0 },
+      { id: 'fc-m23-13', question: 'Siapa sasaran utama advokasi kesehatan?', answer: 'Pengambil keputusan dan pejabat publik.', level: 0 },
+      { id: 'fc-m23-14', question: 'Mengapa metode advokasi perlu dikombinasikan?', answer: 'Karena setiap metode memiliki kelebihan dan kekurangan.', level: 0 },
+      { id: 'fc-m23-15', question: 'Apa saja media advokasi kesehatan?', answer: 'Media cetak, elektronik, luar ruang, pameran, dan media sosial.', level: 0 },
+      { id: 'fc-m23-16', question: 'Apa itu lobby dalam advokasi?', answer: 'Percakapan informal untuk mempengaruhi pengambil keputusan.', level: 0 },
+      { id: 'fc-m23-17', question: 'Apa fungsi petisi dalam advokasi?', answer: 'Memberikan tekanan kolektif secara formal.', level: 0 },
+      { id: 'fc-m23-18', question: 'Apa tujuan debat dalam advokasi?', answer: 'Membahas isu kesehatan dengan berbagai sudut pandang.', level: 0 },
+      { id: 'fc-m23-19', question: 'Apa tujuan negosiasi dalam advokasi?', answer: 'Mencapai kesepakatan bersama.', level: 0 },
+      { id: 'fc-m23-20', question: 'Keterampilan apa yang dibutuhkan pelaksana advokasi?', answer: 'Komunikasi, pengalaman organisasi, berbicara di depan umum, dan kemampuan menulis.', level: 0 }
+    ],
+    createdAt: '2026-06-03T00:00:00Z'
+  },
+  {
+    id: 'm24',
+    subjectId: 'advokes',
+    title: 'PTM 7: Peran Stakeholder dan Pelaksana Advokasi Kesehatan',
+    content: 'Advokasi kesehatan sangat dipengaruhi oleh ketepatan dalam menentukan stakeholder dan pelaksana advokasi. Stakeholder merupakan pihak yang memiliki kepentingan atau pengaruh terhadap kebijakan, sedangkan advocate merupakan pihak yang menginisiasi dan menjalankan proses advokasi. Keberhasilan advokasi tidak hanya ditentukan oleh isi pesan, tetapi juga oleh siapa yang menyampaikan pesan dan kepada siapa pesan tersebut ditujukan.',
+    points: [
+      'Stakeholder', 'Advocate', 'Advokasi kesehatan', 'Pengambil keputusan', 'Pelaksana advokasi', 'Juru bicara',
+      'Evidence based policy', 'Data analyst', 'Lobbyist', 'Communication specialist', 'Kebijakan kesehatan', 'Pengaruh kebijakan',
+      'Strategi advokasi', 'Media massa', 'Media sosial', 'Persuasi', 'Komunikasi kesehatan', 'Stakeholder mapping'
+    ],
+    formulas: [
+      'Keberhasilan advokasi = Siapa bicara + Kepada siapa bicara',
+      'Stakeholder = Pengaruh + Kepentingan',
+      'Advocate = Penggerak + Pelaksana',
+      'Peran advocate = Bicara + Data + Lobby + Komunikasi',
+      'Strategi = Aktor tepat + Pesan tepat'
+    ],
+    flashcards: [
+      { id: 'fc-m24-1', question: 'Apa fokus utama PTM 7 Advokasi Kesehatan?', answer: 'Peran stakeholder dan pelaksana advokasi kesehatan.', level: 0 },
+      { id: 'fc-m24-2', question: 'Apa yang dimaksud stakeholder dalam advokasi?', answer: 'Pihak yang memiliki kepentingan atau pengaruh terhadap kebijakan.', level: 0 },
+      { id: 'fc-m24-3', question: 'Apa yang dimaksud advocate?', answer: 'Pihak yang menginisiasi dan menjalankan advokasi.', level: 0 },
+      { id: 'fc-m24-4', question: 'Mengapa pemilihan aktor penting dalam advokasi?', answer: 'Karena menentukan keberhasilan strategi advokasi.', level: 0 },
+      { id: 'fc-m24-5', question: 'Apa filosofi utama keberhasilan advokasi menurut materi?', answer: 'Siapa yang bicara dan kepada siapa berbicara menentukan keberhasilan.', level: 0 },
+      { id: 'fc-m24-6', question: 'Apa perbedaan stakeholder and advocate?', answer: 'Stakeholder dipengaruhi atau mempengaruhi kebijakan, advocate menjalankan advokasi.', level: 0 },
+      { id: 'fc-m24-7', question: 'Apa risiko strategi advokasi yang salah sasaran?', answer: 'Menjadi kegagalan awal advokasi.', level: 0 },
+      { id: 'fc-m24-8', question: 'Dalam kasus ruang laktasi, siapa contoh stakeholder utama?', answer: 'Pembuat regulasi dan pengambil keputusan.', level: 0 },
+      { id: 'fc-m24-9', question: 'Apa peran juru bicara dalam advokasi?', answer: 'Menjadi wajah publik dan menyampaikan isu.', level: 0 },
+      { id: 'fc-m24-10', question: 'Mengapa juru bicara harus kredibel?', answer: 'Agar pesan lebih dipercaya dan persuasif.', level: 0 },
+      { id: 'fc-m24-11', question: 'Apa tugas data analyst dalam advokasi?', answer: 'Menyediakan bukti ilmiah untuk mendukung kebijakan.', level: 0 },
+      { id: 'fc-m24-12', question: 'Apa yang dimaksud evidence based policy?', answer: 'Kebijakan yang dibuat berdasarkan bukti ilmiah.', level: 0 },
+      { id: 'fc-m24-13', question: 'Apa peran lobbyist dalam advokasi?', answer: 'Melakukan pendekatan personal kepada pengambil keputusan.', level: 0 },
+      { id: 'fc-m24-14', question: 'Apa fungsi communication specialist?', answer: 'Mengemas pesan untuk media massa dan media sosial.', level: 0 },
+      { id: 'fc-m24-15', question: 'Mengapa komunikasi penting dalam advokasi?', answer: 'Agar pesan dapat diterima dan mempengaruhi sasaran.', level: 0 },
+      { id: 'fc-m24-16', question: 'Apa tujuan melakukan stakeholder mapping?', answer: 'Mengidentifikasi pihak yang berpengaruh terhadap kebijakan.', level: 0 },
+      { id: 'fc-m24-17', question: 'Mengapa data penting dalam advokasi kesehatan?', answer: 'Karena meningkatkan kekuatan argumen dan legitimasi.', level: 0 },
+      { id: 'fc-m24-18', question: 'Apa kualitas utama seorang advocate yang efektif?', answer: 'Strategis, komunikatif, dan persuasif.', level: 0 },
+      { id: 'fc-m24-19', question: 'Apa pesan utama dari materi PTM 7?', answer: 'Menempatkan orang yang tepat pada peran yang tepat.', level: 0 },
+      { id: 'fc-m24-20', question: 'Apa inti keberhasilan advokasi kesehatan?', answer: 'Strategi yang tepat dalam memilih aktor dan pendekatan.', level: 0 }
     ],
     createdAt: '2026-06-03T00:00:00Z'
   }

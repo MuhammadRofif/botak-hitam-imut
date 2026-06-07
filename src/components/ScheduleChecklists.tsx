@@ -104,6 +104,14 @@ export default function ScheduleChecklists({ subjects, onSelectSubject, onGoToMa
       subjectId: 'praktik-investigasi-wabah',
       room: 'Ruang E',
       color: 'bg-red-50 border-red-350 text-red-950'
+    },
+    {
+      date: '08 Juni 2026',
+      time: '08:00-09:40',
+      subjectName: 'Advokes',
+      subjectId: 'advokes',
+      room: 'Ruang A',
+      color: 'bg-blue-50 border-blue-350 text-blue-800'
     }
   ];
 
