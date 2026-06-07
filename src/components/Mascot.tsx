@@ -61,7 +61,7 @@ export default function Mascot({ mood = 'idle', size = 160, speechBubble }: Masc
   const effects = getEffects();
 
   // Animations based on mood
-  const getAnimation = () => {
+  const getAnimation = (): any => {
     switch (mood) {
       case 'sleeping':
         return {
@@ -99,7 +99,7 @@ export default function Mascot({ mood = 'idle', size = 160, speechBubble }: Masc
     }
   };
 
-  const getTransition = () => {
+  const getTransition = (): any => {
     switch (mood) {
       case 'sleeping':
         return {
