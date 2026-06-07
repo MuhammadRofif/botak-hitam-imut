@@ -304,6 +304,18 @@ export default function App() {
     addXp(35, `Berhasil mencatat rangkuman materi baru: "${newMaterial.title}"! 🎉`);
   };
 
+  // Edit Material
+  const handleEditMaterial = async (updatedMaterial: Material) => {
+    const updated = materials.map((m) => m.id === updatedMaterial.id ? updatedMaterial : m);
+    const sortedUpdated = sortMaterials(updated);
+    setMaterials(sortedUpdated);
+    localStorage.setItem('uas_materials', JSON.stringify(sortedUpdated));
+
+    if (isSupabaseConfigured) {
+      await saveSupabaseMaterial(updatedMaterial);
+    }
+  };
+
   // Sound Synth for Celebration
   const playMilestoneSound = () => {
     try {
@@ -727,6 +739,7 @@ export default function App() {
                 subjects={subjects}
                 materials={materials}
                 onAddMaterial={handleAddMaterial}
+                onEditMaterial={handleEditMaterial}
                 onAddSubject={handleAddSubject}
                 onSelectSubject={setSelectedSubjectId}
                 selectedSubjectId={selectedSubjectId}

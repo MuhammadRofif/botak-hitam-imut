@@ -36,6 +36,7 @@ interface MateriDashboardProps {
   subjects: Subject[];
   materials: Material[];
   onAddMaterial: (newMaterial: Material) => void;
+  onEditMaterial: (updatedMaterial: Material) => void;
   onAddSubject: (newSubject: Subject) => void;
   onSelectSubject: (subjectId: string) => void;
   selectedSubjectId: string;
@@ -45,6 +46,7 @@ export default function MateriDashboard({
   subjects,
   materials,
   onAddMaterial,
+  onEditMaterial,
   onAddSubject,
   onSelectSubject,
   selectedSubjectId
@@ -57,11 +59,32 @@ export default function MateriDashboard({
   const [matSubject, setMatSubject] = useState(subjects[0]?.id || '');
   const [matContent, setMatContent] = useState('');
   
-  const [matPoints, setMatPoints] = useState<string[]>(['']);
-  const [newPointInput, setNewPointInput] = useState('');
-  
-  const [matFormulas, setMatFormulas] = useState<string[]>(['']);
-  const [newFormulaInput, setNewFormulaInput] = useState('');
+  const [matPointsStr, setMatPointsStr] = useState('');
+  const [matFormulasStr, setMatFormulasStr] = useState('');
+  const [editingMaterialId, setEditingMaterialId] = useState<string | null>(null);
+
+  // Helper to trigger edit mode
+  const handleEditClick = (mat: Material) => {
+    setEditingMaterialId(mat.id);
+    setMatTitle(mat.title);
+    setMatSubject(mat.subjectId);
+    setMatContent(mat.content);
+    setMatPointsStr(mat.points.join(', '));
+    setMatFormulasStr(mat.formulas.join(', '));
+    setMatFlashcards(mat.flashcards.map(fc => ({ id: fc.id, question: fc.question, answer: fc.answer })));
+    setActiveTab('add-materi');
+  };
+
+  // Helper to cancel add or edit mode
+  const handleCancelAddEdit = () => {
+    setEditingMaterialId(null);
+    setMatTitle('');
+    setMatContent('');
+    setMatPointsStr('');
+    setMatFormulasStr('');
+    setMatFlashcards([{ id: '1', question: '', answer: '' }]);
+    setActiveTab('view');
+  };
 
   // Flashcards builder for new Material
   const [matFlashcards, setMatFlashcards] = useState<{ question: string; answer: string; id: string }[]>([
@@ -218,29 +241,44 @@ export default function MateriDashboard({
       return;
     }
 
-    const cleanPoints = matPoints.filter((p) => p.trim() !== '');
-    const cleanFormulas = matFormulas.filter((f) => f.trim() !== '');
+    const cleanPoints = matPointsStr.split(',').map((p) => p.trim()).filter((p) => p !== '');
+    const cleanFormulas = matFormulasStr.split(',').map((f) => f.trim()).filter((f) => f !== '');
 
-    const newMat: Material = {
-      id: 'm-' + Date.now(),
-      subjectId: matSubject,
-      title: matTitle.trim(),
-      content: matContent.trim(),
-      points: cleanPoints,
-      formulas: cleanFormulas,
-      flashcards: flashcardsList,
-      createdAt: new Date().toISOString()
-    };
-
-    onAddMaterial(newMat);
-    alert(`Yeay! Materi "${matTitle}" berhasil ditambahkan! 🌟`);
+    if (editingMaterialId) {
+      const updatedMat: Material = {
+        id: editingMaterialId,
+        subjectId: matSubject,
+        title: matTitle.trim(),
+        content: matContent.trim(),
+        points: cleanPoints,
+        formulas: cleanFormulas,
+        flashcards: flashcardsList,
+        createdAt: materials.find((m) => m.id === editingMaterialId)?.createdAt || new Date().toISOString()
+      };
+      onEditMaterial(updatedMat);
+      alert(`Yeay! Materi "${matTitle}" berhasil diperbarui! 🌟`);
+    } else {
+      const newMat: Material = {
+        id: 'm-' + Date.now(),
+        subjectId: matSubject,
+        title: matTitle.trim(),
+        content: matContent.trim(),
+        points: cleanPoints,
+        formulas: cleanFormulas,
+        flashcards: flashcardsList,
+        createdAt: new Date().toISOString()
+      };
+      onAddMaterial(newMat);
+      alert(`Yeay! Materi "${matTitle}" berhasil ditambahkan! 🌟`);
+    }
     
     // Reset inputs
     setMatTitle('');
     setMatContent('');
-    setMatPoints(['']);
-    setMatFormulas(['']);
+    setMatPointsStr('');
+    setMatFormulasStr('');
     setMatFlashcards([{ id: '1', question: '', answer: '' }]);
+    setEditingMaterialId(null);
     setActiveTab('view');
   };
 
@@ -292,6 +330,12 @@ export default function MateriDashboard({
           </button>
           <button
             onClick={() => {
+              setEditingMaterialId(null);
+              setMatTitle('');
+              setMatContent('');
+              setMatPointsStr('');
+              setMatFormulasStr('');
+              setMatFlashcards([{ id: '1', question: '', answer: '' }]);
               setActiveTab('add-materi');
               if (activeSubject) setMatSubject(activeSubject.id);
             }}
@@ -421,15 +465,22 @@ export default function MateriDashboard({
                       animate={{ scale: 1, opacity: 1 }}
                       className="bg-white border-3 border-[#6D6875] rounded-3xl p-5 shadow-[4px_4px_0px_#6D6875] hover:shadow-[6px_6px_0px_#6D6875] transition-all"
                     >
-                      {/* Top Header of Material: Title & Flashcard count */}
-                      <div className="flex items-center justify-between border-b-2 border-slate-100 pb-2.5 mb-3">
-                        <h4 className="text-md font-sans font-black text-slate-800 flex items-center gap-1.5">
+                      <div className="flex items-center justify-between border-b-2 border-slate-100 pb-2.5 mb-3 gap-2">
+                        <h4 className="text-md font-sans font-black text-slate-800 flex items-center gap-1.5 min-w-0 flex-1">
                           <GraduationCap className="text-indigo-600 text-indigo-500 shrink-0" size={18} />
-                          {mat.title}
+                          <span className="truncate">{mat.title}</span>
                         </h4>
-                        <span className="text-[10px] font-mono font-bold bg-pink-100 border-2 border-pink-700 text-pink-700 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-[1.5px_1.5px_0px_0px_#BE123C]">
-                          ✨ {mat.flashcards.length} Flashcard
-                        </span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-mono font-bold bg-pink-100 border-2 border-pink-700 text-pink-700 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-[1.5px_1.5px_0px_0px_#BE123C]">
+                            ✨ {mat.flashcards.length} Flashcard
+                          </span>
+                          <button
+                            onClick={() => handleEditClick(mat)}
+                            className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border-2 border-slate-700 bg-amber-100 hover:bg-amber-200 text-slate-800 transition-all cursor-pointer shadow-[1.5px_1.5px_0px_0px_#1E293B] active:translate-y-0.5 flex items-center gap-1"
+                          >
+                            ✏️ Edit
+                          </button>
+                        </div>
                       </div>
 
                       {/* Content text */}
@@ -494,10 +545,16 @@ export default function MateriDashboard({
             className="bg-white border-3 border-[#6D6875] rounded-3xl p-6 shadow-[6px_6px_0px_#6D6875] max-w-2xl mx-auto space-y-5"
           >
             <div className="flex items-center gap-2 border-b-2 border-slate-100 pb-3 mb-1">
-              <span className="text-2xl">📝</span>
+              <span className="text-2xl">{editingMaterialId ? '✏️' : '📝'}</span>
               <div>
-                <h3 className="text-lg font-sans font-black text-slate-800">Catat Rangkuman UAS</h3>
-                <p className="text-xs text-slate-500">Buat rangkuman catatanmu, sistem otomatis menyiapkannya ke mini-game.</p>
+                <h3 className="text-lg font-sans font-black text-slate-800">
+                  {editingMaterialId ? 'Edit Rangkuman UAS' : 'Catat Rangkuman UAS'}
+                </h3>
+                <p className="text-xs text-slate-500">
+                  {editingMaterialId 
+                    ? 'Ubah catatan rangkumanmu, sistem otomatis menyiapkannya ke mini-game.'
+                    : 'Buat rangkuman catatanmu, sistem otomatis menyiapkannya ke mini-game.'}
+                </p>
               </div>
             </div>
 
@@ -554,7 +611,7 @@ export default function MateriDashboard({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">
-                  Poin Penting (Pisahkan Komma)
+                  Poin Penting (Pisahkan Koma)
                 </label>
                 <span className="text-[10px] text-slate-400 leading-tight block mb-1.5">
                   Poin ingatan penting untuk dicocokkan di mini-game.
@@ -562,7 +619,8 @@ export default function MateriDashboard({
                 <input
                   type="text"
                   placeholder="Contoh: Hipotenusa, Sudut Siku-Siku"
-                  onChange={(e) => setMatPoints(e.target.value.split(','))}
+                  value={matPointsStr}
+                  onChange={(e) => setMatPointsStr(e.target.value)}
                   className="w-full bg-slate-50 border-2.5 border-slate-300 focus:border-indigo-500 hover:border-slate-400 font-sans text-xs px-3 py-2 rounded-xl outline-none"
                 />
               </div>
@@ -577,7 +635,8 @@ export default function MateriDashboard({
                 <input
                   type="text"
                   placeholder="Contoh: c2 = a2 + b2, a2 = c2 - b2"
-                  onChange={(e) => setMatFormulas(e.target.value.split(','))}
+                  value={matFormulasStr}
+                  onChange={(e) => setMatFormulasStr(e.target.value)}
                   className="w-full bg-slate-50 border-2.5 border-slate-300 focus:border-indigo-500 hover:border-slate-400 font-sans text-xs px-3 py-2 rounded-xl outline-none"
                 />
               </div>
@@ -638,7 +697,7 @@ export default function MateriDashboard({
             <div className="pt-3 flex gap-3 justify-end">
               <button
                 type="button"
-                onClick={() => setActiveTab('view')}
+                onClick={handleCancelAddEdit}
                 className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-sans font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-300 cursor-pointer"
               >
                 Kembali
@@ -647,7 +706,7 @@ export default function MateriDashboard({
                 type="submit"
                 className="bg-rose-500 hover:bg-rose-600 border-2 border-rose-700 text-white font-sans font-extrabold text-xs px-6 py-2.5 rounded-xl cursor-pointer shadow-[3px_3px_0px_0px_#881337] active:translate-y-0.5"
               >
-                Simpan Materi & Cetak Flashcard! 🎉
+                {editingMaterialId ? 'Simpan Perubahan! 🌟' : 'Simpan Materi & Cetak Flashcard! 🎉'}
               </button>
             </div>
           </motion.form>
